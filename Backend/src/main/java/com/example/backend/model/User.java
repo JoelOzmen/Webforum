@@ -1,6 +1,7 @@
 package com.example.backend.model;
 
 import javax.persistence.*;
+
 //DO: Database Object
 @Entity
 public class User {
@@ -38,5 +39,4 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
-
 }

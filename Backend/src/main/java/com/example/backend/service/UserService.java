@@ -1,9 +1,9 @@
 package com.example.backend.service;
 
-
 import com.example.backend.model.User;
 import com.example.backend.model.viewModel.UserVM;
 import com.example.backend.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -15,32 +15,31 @@ public class UserService {
     final UserRepository userRepository;
     private UserVM userVM;
 
+    @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-
-    public List<UserVM> findAll()
-    {
+    public List<UserVM> findAll() {
         var users = userRepository.findAll();
-        List <UserVM> userVMS = new LinkedList<>();
-        for (User u: users)
-        {
-            userVM = new UserVM(u.getId(),u.getUsername());
+        List<UserVM> userVMS = new LinkedList<>();
+        for (User u : users) {
+            userVM = new UserVM(u.getId(), u.getUsername());
             userVMS.add(userVM);
         }
         //return userRepository.findAll();
         return userVMS;
     }
 
-    public User saveAndRedden(User user)
-    {
+    public User saveAndRedden(User user) {
         return userRepository.save(user);
+    }
 
+    public UserVM findUser(long id) {
+        return userRepository.findUserById(id);
     }
 
     public void deleteUser(long id) {
-         userRepository.deleteById(id);
-
+        userRepository.deleteById(id);
     }
 }
