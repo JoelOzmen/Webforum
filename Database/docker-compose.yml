@@ -13,7 +13,7 @@ services:
       MYSQL_ROOT_PASSWORD: 'password'
     ports:
       # <Port exposed> : < MySQL Port running inside container>
-      - '3307:3306'  #3307 för att jag använder 3306 nånstans
+      - '3306:3306'  #3307 för att jag använder 3306 nånstans
     expose:
       # Opens port 3306 on the container
       - '3306'

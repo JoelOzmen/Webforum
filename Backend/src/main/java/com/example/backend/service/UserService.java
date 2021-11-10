@@ -17,7 +17,14 @@ public class UserService {
     }
 
 
-    public List<User> findAll() {
+    public List<User> findAll()
+    {
         return userRepository.findAll();
+    }
+
+    public User saveAndRedden(User user)
+    {
+        return userRepository.save(user);
+
     }
 }
