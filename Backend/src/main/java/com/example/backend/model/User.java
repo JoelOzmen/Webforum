@@ -1,10 +1,10 @@
 package com.example.backend.model;
 
 import javax.persistence.*;
-
+//DO: Database Object
 @Entity
 public class User {
-       @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
