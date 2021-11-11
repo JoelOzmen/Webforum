@@ -1,5 +1,7 @@
 import React from'react'
 import ReactDOM from 'react-dom'
+import LoginButton from './ButtonComp/LoginButton'
+
 
 const reactContentRoot = document.getElementById("root")
 
@@ -8,11 +10,9 @@ const App = () => {
     const myItem = "Joel"
   
     return (
-      <ul>
-          <li>{myItem}</li>
-          <li>item2</li>
-          <li>item3</li>
-      </ul>
+      <div>
+        <LoginButton></LoginButton>
+      </div>
     )
   
   }
