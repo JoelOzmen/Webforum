@@ -1,23 +1,12 @@
-import React from'react'
-import ReactDOM from 'react-dom'
-import LoginButton from './ButtonComp/LoginButton'
-
-
-const reactContentRoot = document.getElementById("root")
-
+import React from "react";
+import LoginForm from "./Form/LoginForm";
 
 const App = () => {
-    const myItem = "Joel"
-  
-    return (
-      <div>
-        <LoginButton></LoginButton>
-      </div>
-    )
-  
-  }
-
-
-ReactDOM.render(<App />, reactContentRoot)
+  return (
+    <div>
+        <LoginForm />
+    </div>
+  )
+}
 
 export default App;
