@@ -1,12 +1,19 @@
-import React from "react";
 import LoginForm from "./Form/LoginForm";
+import RegForm from "./Form/RegForm";
+import * as React from "react";
+import { Routes, Route, Link } from "react-router-dom";
+//import "./App.css";
 
-const App = () => {
+function App() {
   return (
-    <div>
-        <LoginForm />
+    <div className="App">
+      <Routes>
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/reg" element={<RegForm />} />
+        {/* Lägg till fler routes sen */}
+      </Routes>
     </div>
-  )
+  );
 }
 
 export default App;
