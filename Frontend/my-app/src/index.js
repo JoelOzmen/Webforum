@@ -1,21 +1,9 @@
-import React from'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
+import App from './components/App'
 
-const reactContentRoot = document.getElementById("root")
 
-const App = () => {
-  const myItem = "Joel"
 
-  return (
-    <ul>
-        <li>{myItem}</li>
-        <li>item2</li>
-        <li>item3</li>
-    </ul>
-  )
+const reactRoot = document.getElementById("root")
 
-}
-
-ReactDOM.render(<App />, reactContentRoot)
-
-export default App;
+ReactDOM.render(<App />,reactRoot)
