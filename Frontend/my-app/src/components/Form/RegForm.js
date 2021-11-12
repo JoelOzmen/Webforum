@@ -4,22 +4,23 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./RegisterButton.css"
 
 const RegForm=()=>{
-  return( <Form>
-      <h2>Register User</h2>
-  <Form.Group className="mb-3" controlId="formBasicEmail">
-    <Form.Label>Username</Form.Label>
-    <Form.Control type="username" placeholder="Username" />
-  </Form.Group>
+  return( 
+  <Form className="text-center">
+        <h2>Register User</h2>
+    <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Label>Username</Form.Label>
+      <Form.Control type="username" placeholder="Username" />
+    </Form.Group>
 
-  <Form.Group className="mb-3" controlId="formBasicPassword">
-    <Form.Label>Password</Form.Label>
-    <Form.Control type="password" placeholder="Password" />
-  </Form.Group>
-  <Form.Group className="mb-3" controlId="formBasicCheckbox">
-  </Form.Group>
-  <Button variant="primary" type="submit">
-    Submit
-  </Button>
+    <Form.Group className="mb-3" controlId="formBasicPassword">
+      <Form.Label>Password</Form.Label>
+      <Form.Control type="password" placeholder="Password" />
+    </Form.Group>
+    <Form.Group className="mb-3" controlId="formBasicCheckbox">
+    </Form.Group>
+    <Button variant="primary" type="submit">
+      Submit
+    </Button>
   </Form> 
 )
 }

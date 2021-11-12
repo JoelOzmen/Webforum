@@ -7,13 +7,15 @@ import { Routes, Route, Link } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-      <Routes>
-        <Route path="/login" element={<LoginForm />} />
+      
+      <Routes> 
+        <Route path="/" element={<LoginForm />} />
         <Route path="/reg" element={<RegForm />} />
         {/* Lägg till fler routes sen */}
       </Routes>
+     
     </div>
   );
-}
+  }
 
 export default App;

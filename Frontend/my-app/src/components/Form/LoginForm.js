@@ -3,15 +3,16 @@ import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import "./LoginButton.css"
+import "./LoginForm.css"
 
 const LoginForm = () => {
   return (
-    <Form>
+    <Form className="text-center">
       <h2>Log in</h2>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Username</Form.Label>
-        <Form.Control type="username" placeholder="Username" />
-      </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label >Username</Form.Label>
+          <Form.Control type="username" placeholder="Username" />
+        </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
