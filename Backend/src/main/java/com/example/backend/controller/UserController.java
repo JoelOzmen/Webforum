@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/user")
+@RequestMapping(path = "/api/users")
 public class UserController {
     final UserService userService;
 
@@ -18,21 +18,21 @@ public class UserController {
         this.userService = userService;
     }
 
-    //http://localhost:8090/api/user/users
-    @GetMapping("/users")
+
+    @GetMapping
     public ResponseEntity<List<UserVM>> getAllUsers() {
         var users = userService.findAll();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    //http://localhost:8090/api/user/"id"
+    //http://localhost:8090/api/users/"id"
     @GetMapping(path = "/{id}")
     public ResponseEntity<List<UserVM>> getUserById(@PathVariable long id) {
         UserVM user = userService.findUser(id);
         return new ResponseEntity(user, HttpStatus.OK);
     }
 
-    //http://localhost:8090/api/user/add
+    //http://localhost:8090/api/users/add
     @PostMapping(path = "/add", consumes = ("application/json"), produces = "application/json")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         User user1 = userService.saveAndRedden(user);
@@ -46,3 +46,4 @@ public class UserController {
         return new ResponseEntity(HttpStatus.OK);
     }
 }
+
