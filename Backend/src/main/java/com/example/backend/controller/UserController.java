@@ -3,6 +3,8 @@ package com.example.backend.controller;
 import com.example.backend.model.User;
 import com.example.backend.model.viewModel.UserVM;
 import com.example.backend.service.UserService;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +20,6 @@ public class UserController {
         this.userService = userService;
     }
 
-
     @GetMapping
     public ResponseEntity<List<UserVM>> getAllUsers() {
         var users = userService.findAll();
@@ -27,15 +28,23 @@ public class UserController {
 
     //http://localhost:8090/api/users/"id"
     @GetMapping(path = "/{id}")
-    public ResponseEntity<List<UserVM>> getUserById(@PathVariable long id) {
-        UserVM user = userService.findUser(id);
-        return new ResponseEntity(user, HttpStatus.OK);
+    public ResponseEntity getUserById(@PathVariable long id) {
+        User user = userService.findUser(id);
+        var json = new JSONObject();
+        try {
+            json.put("id", user.getId());
+            json.put("username", user.getUsername());
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity(json.toString(), HttpStatus.OK);
     }
 
     //http://localhost:8090/api/users/add
-    @PostMapping(path = "/add", consumes = ("application/json"), produces = "application/json")
+    @PostMapping(path = "/add")
     public ResponseEntity<User> createUser(@RequestBody User user) {
-        User user1 = userService.saveAndRedden(user);
+        User user1 = userService.addUser(user);
         return new ResponseEntity(user1, HttpStatus.OK);
     }
 
@@ -44,6 +53,19 @@ public class UserController {
     public ResponseEntity deleteUser(@PathVariable long id) {
         userService.deleteUser(id);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    //http://localhost:8090/api/users/login
+    @PostMapping(path = "/login")
+    public ResponseEntity loginApp(String username, String password) {
+        boolean isLoggCorrect=userService.login(username,password);
+        var json = new JSONObject();
+        try {
+            json.put("isLoggedIn",isLoggCorrect);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity( json.toString(),HttpStatus.OK);
     }
 }
 

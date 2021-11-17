@@ -31,15 +31,20 @@ public class UserService {
         return userVMS;
     }
 
-    public User saveAndRedden(User user) {
+    public User addUser(User user) {
         return userRepository.save(user);
     }
 
-    public UserVM findUser(long id) {
+    public User findUser(long id) {
         return userRepository.findUserById(id);
     }
 
     public void deleteUser(long id) {
         userRepository.deleteById(id);
+    }
+
+    public boolean login(String username, String password)
+    {
+        return userRepository.existsUserByUsernameAndPassword(username,password);
     }
 }
