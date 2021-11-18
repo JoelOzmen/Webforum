@@ -58,10 +58,10 @@ public class UserController {
     //http://localhost:8090/api/users/login
     @PostMapping(path = "/login")
     public ResponseEntity loginApp(String username, String password) {
-        boolean isLoggCorrect=userService.login(username,password);
+        var userId=userService.login(username,password);
         var json = new JSONObject();
         try {
-            json.put("isLoggedIn",isLoggCorrect);
+            json.put("isLoggedIn",userId);
         } catch (JSONException e) {
             e.printStackTrace();
         }

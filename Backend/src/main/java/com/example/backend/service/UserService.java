@@ -43,8 +43,18 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public boolean login(String username, String password)
+    public Long login(String username, String password)
     {
-        return userRepository.existsUserByUsernameAndPassword(username,password);
+        var tryLogin = userRepository.existsUserByUsernameAndPassword(username,password);
+        if (tryLogin)
+        {
+            var userId = userRepository.findByUsernameAndPassword(username,password);
+            return userId.getId();
+        }
+        else{
+            return null;
+        }
+
+        //return userRepository.existsUserByUsernameAndPassword(username,password);
     }
 }
