@@ -4,6 +4,7 @@ import com.example.backend.model.User;
 import com.example.backend.model.viewModel.UserVM;
 import com.example.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -32,7 +33,14 @@ public class UserService {
     }
 
     public User addUser(User user) {
+       boolean doUserExist =userRepository.existsUserByUsername(user.getUsername());
+        if (doUserExist)
+        {
+            return null;
+        }
+        else {
         return userRepository.save(user);
+        }
     }
 
     public User findUser(long id) {

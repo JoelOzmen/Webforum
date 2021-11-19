@@ -46,7 +46,13 @@ public class UserController {
     @PostMapping(path = "/add")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         User user1 = userService.addUser(user);
-        return new ResponseEntity(user1, HttpStatus.OK);
+        if(user1 ==null)
+        {
+            return new ResponseEntity(user1, HttpStatus.IM_USED);
+        }
+        else{
+            return new ResponseEntity(user1, HttpStatus.OK);
+        }
     }
 
     //servicen borde prata med kontrollen via viewmodel, via view modellen pratar kontrollen och servicen

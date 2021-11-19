@@ -67,7 +67,7 @@ function App() {
       
       <Routes> 
         <Route path="/" element={<LoginForm  userFade = {usernameFade} setUserFade ={setUsernameFade}/>} />
-        <Route path="/reg" element={<RegForm amount = {NameState} setAmount ={setNameState} />} />
+        <Route path="/reg" element={<RegForm userFade = {usernameFade} setUserFade ={setUsernameFade} />} />
         <Route path="/Fadebook" element={<Fadebook  userFade = {usernameFade} setUserFade ={setUsernameFade}/> }  />
         {/* Lägg till fler routes sen */}
       </Routes>

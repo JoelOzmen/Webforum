@@ -32,15 +32,28 @@ const RegForm = (props) => {
     event.preventDefault();
 
 
-    const rawResponse = fetch('http://localhost:8090/api/users/add', {
+     fetch('http://localhost:8090/api/users/add', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({username: USERNAME, password: PASSWORD})
+    })
+    .then(res => res.json())
+    .then(data => {
+      // do something with data
+    })
+    .catch(rejected => {
+        alert("User already exist or wrong password")
+        console.log(rejected);
     });
-    console.log(rawResponse)
+    
+    
+
+     
+     
+    //console.log("eeeeerrrreeerrrroooror"+rawResponse)
     
   }
 
