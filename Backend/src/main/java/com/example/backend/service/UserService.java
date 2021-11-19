@@ -43,13 +43,13 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public Long login(String username, String password)
+    public User login(String username, String password)
     {
         var tryLogin = userRepository.existsUserByUsernameAndPassword(username,password);
         if (tryLogin)
         {
-            var userId = userRepository.findByUsernameAndPassword(username,password);
-            return userId.getId();
+            var user = userRepository.findByUsernameAndPassword(username,password);
+            return user;
         }
         else{
             return null;

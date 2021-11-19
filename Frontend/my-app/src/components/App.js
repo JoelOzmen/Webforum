@@ -4,7 +4,9 @@ import RegForm from "./Form/RegForm";
 import React,{useState ,useEffect} from 'react'
 import { Routes, Route, Link } from "react-router-dom";
 import Fadebook from "./Fadebook";
+import { getCookie } from "./Cookies";
 //import "./App.css";
+
 
 async function getThing() {
   /*try {
@@ -23,9 +25,9 @@ async function getThing() {
           console.log(data)    
       }) */
 
-      const response = await fetch('http://localhost:8090/api/users/'+4);
-      const jsonData = await response.json();
-      console.log(jsonData) 
+      // const response = await fetch('http://localhost:8090/api/users/'+4);
+      // const jsonData = await response.json();
+      // console.log(jsonData) 
 
       
  
@@ -34,19 +36,39 @@ async function getThing() {
 }
 
 function App() {
-
+  const [IdState,setIdState] = useState([])
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [usernameFade,setUsernameFade] = useState([])
+  
+  getCookie("a")
+  
+  console.log("hhhhhhhh"+isLoggedIn)
   getThing()
   const [NameState,setNameState] = useState([])
+
+  useEffect(() => {
+    console.log("apppppppppp "+usernameFade)
+    
+    
+  }, [usernameFade]);
 
   return (
     <div className="App">
 
+    {/* <div>
+      {isLoggedIn ? (
+        <LogoutButton onClick={this.handleLogoutClick} />
+      ) : (
+        <LoginButton onClick={this.handleLoginClick} />
+      )}
+    </div> */}
+
       
       
       <Routes> 
-        <Route path="/" element={<LoginForm />} />
+        <Route path="/" element={<LoginForm  userFade = {usernameFade} setUserFade ={setUsernameFade}/>} />
         <Route path="/reg" element={<RegForm amount = {NameState} setAmount ={setNameState} />} />
-        <Route path="/Fadebook" element={<Fadebook/>}  />
+        <Route path="/Fadebook" element={<Fadebook  userFade = {usernameFade} setUserFade ={setUsernameFade}/> }  />
         {/* Lägg till fler routes sen */}
       </Routes>
      

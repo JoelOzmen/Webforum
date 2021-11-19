@@ -1,6 +1,7 @@
 package com.example.backend.controller;
 
 import com.example.backend.model.User;
+import com.example.backend.model.viewModel.LoginVM;
 import com.example.backend.model.viewModel.UserVM;
 import com.example.backend.service.UserService;
 import org.springframework.boot.configurationprocessor.json.JSONException;
@@ -57,11 +58,12 @@ public class UserController {
 
     //http://localhost:8090/api/users/login
     @PostMapping(path = "/login")
-    public ResponseEntity loginApp(String username, String password) {
-        var userId=userService.login(username,password);
+    public ResponseEntity loginApp(@RequestBody LoginVM loginVM) {
+        var userId=userService.login(loginVM.getUsername(),loginVM.getPassword());
         var json = new JSONObject();
         try {
-            json.put("isLoggedIn",userId);
+            json.put("id",userId.getId());
+            json.put("user", userId.getUsername());
         } catch (JSONException e) {
             e.printStackTrace();
         }

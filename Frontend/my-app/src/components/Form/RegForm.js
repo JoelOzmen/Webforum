@@ -40,6 +40,7 @@ const RegForm = (props) => {
       },
       body: JSON.stringify({username: USERNAME, password: PASSWORD})
     });
+    console.log(rawResponse)
     
   }
 
