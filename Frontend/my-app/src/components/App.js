@@ -28,11 +28,6 @@ async function getThing() {
       // const response = await fetch('http://localhost:8090/api/users/'+4);
       // const jsonData = await response.json();
       // console.log(jsonData) 
-
-      
- 
-
-
 }
 
 function App() {
@@ -40,17 +35,14 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [usernameFade,setUsernameFade] = useState([])
   
-  getCookie("a")
-  
-  console.log("hhhhhhhh"+isLoggedIn)
-  getThing()
-  const [NameState,setNameState] = useState([])
 
-  useEffect(() => {
-    console.log("apppppppppp "+usernameFade)
-    
-    
-  }, [usernameFade]);
+  
+  //getThing() bara exempel på fetch som jag testade och gjorde på början
+
+
+  // useEffect(() => {
+  //   console.log("apppppppppp "+usernameFade)
+  // }, [usernameFade]);
 
   return (
     <div className="App">

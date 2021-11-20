@@ -6,16 +6,15 @@ import { getCookie } from './Cookies';
 
 const Fadebook = (props)=>{
 
-    console.log("faaaaaaaaaaaaaadebook "+props.userFade)
+    console.log("fadebook username: "+props.userFade)
    var val =getCookie(props.userFade);
-   console.log("coockie value"+val)
-
+   console.log("coockie value: "+val)
 
     return(
         <form>
         <label>
         FadeBook UserName: {props.userFade}
-          <input type="text" value={val}  />
+          <input type="text"  defaultValue={val}  />
         </label>
        
       </form>

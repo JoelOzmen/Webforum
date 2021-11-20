@@ -25,11 +25,9 @@ const RegForm = (props) => {
 
  
   useEffect(() => {
-    console.log("fuck youuuuu"+userID)
     if(userID !=null){ 
       setIsLoggedIn(true)
-    }else{
-      setIsLoggedIn(false)
+      //setUsernameCoockies(username)
     }
     
   }, [userID]);
@@ -38,11 +36,10 @@ const RegForm = (props) => {
   {
     let USERNAME = username;
     let PASSWORD = password
-    //alert(`${PASSWORD} ${USERNAME}`);
     event.preventDefault();
 
 
-     fetch('http://localhost:8090/api/users/add', {
+    const rawResponse = fetch('http://localhost:8090/api/users/add', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -50,39 +47,25 @@ const RegForm = (props) => {
       },
       body: JSON.stringify({username: USERNAME, password: PASSWORD})
     })
-    .then(res => res.json())
-    .then(data => {
-
-      if (data.id!=null) {
+    .then(Response => Response.json()
+    ).then(data => {
+      
       setUserID(data.id);
-      setCookie(data.user,data.id,2)
-      setUsernameCoockies(data.user)
-      console.log(data)
-      }
-      // do something with data
+      setCookie(username,data.id,2)
+      setUsernameCoockies(username)
+
     })
     .catch(rejected => {
         alert("User already exist or wrong password")
     });
     
-
-    
   }
 
-  
-
-  console.log(isLoggedIn)
-
-const userNAme = usernameCoockies;
-console.log("vaaaaarför"+ userNAme)
-props.setUserFade(userNAme);
+props.setUserFade(username);
 
 if (isLoggedIn) {
   return <Navigate to={"/FadeBook" }/>
  }
-
-
-
 
   return (
     <Form className="text-center" onSubmit={submitForm}>

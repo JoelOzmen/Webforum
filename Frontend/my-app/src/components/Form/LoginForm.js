@@ -22,7 +22,6 @@ const LoginForm = (props) => {
   
   
   useEffect(() => {
-    console.log("fuck youuuuu"+userID)
     if(userID !=null){ 
       setIsLoggedIn(true)
     }
@@ -49,7 +48,7 @@ const LoginForm = (props) => {
       body: JSON.stringify({username: USERNAME, password: PASSWORD})
     }).then(Response => Response.json()
     ).then((data) => {
-
+      
         if (data.id!=null) {
           //setCookie(data.user,data.isLoggedIn,2) 
           setUserID(data.id)
