@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import "./LoginButton.css"
 import "./LoginForm.css"
 import { setCookie } from '../Cookies';
-import { Routes, Route,Navigate,useParams } from "react-router-dom";
+import { Routes, Route,Navigate } from "react-router-dom";
 import Fadebook from '../Fadebook';
 
 const LoginForm = (props) => {
@@ -26,6 +26,7 @@ const LoginForm = (props) => {
     if(userID !=null){ 
       setIsLoggedIn(true)
     }
+    
     
   }, [userID]);
 
@@ -51,15 +52,10 @@ const LoginForm = (props) => {
 
         if (data.id!=null) {
           //setCookie(data.user,data.isLoggedIn,2) 
+          setUserID(data.id)
           setCookie(data.user,data.id,2)
-        setUserID(data.id)
         setUsernameCoockies(data.user)
-        //setIsLoggedIn(true)
-        //setIsLoggedIn(true)
-        //console.log(userID.id)
-        //console.log(isLoggedIn)
-        
-          
+       
         } else {
           alert("Wrong password or user does not exist!")
         }
@@ -68,30 +64,10 @@ const LoginForm = (props) => {
       
       
   }
-//   //togs från internet!!!
-//   function setCookie(name,value,days) {
-//     var expires = "";
-//     if (days) {
-//         var date = new Date();
-//         date.setTime(date.getTime() + (days*24*60*60*1000));
-//         expires = "; expires=" + date.toUTCString();
-//     }
-//     document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-// }
-// //togs från internet!!!
-// function getCookie(name) {
-//   var nameEQ = name + "=";
-//   var ca = document.cookie.split(';');
-//   for(var i=0;i < ca.length;i++) {
-//       var c = ca[i];
-//       while (c.charAt(0)==' ') c = c.substring(1,c.length);
-//       if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-//   }
-//   return null;
-// }
+
 const userNAme = usernameCoockies;
 props.setUserFade(userNAme);
-let {usernamee} = useParams();
+
 console.log("kom igeeeeen "+ userNAme)
 if (isLoggedIn) {
   return <Navigate to={"/Fadebook" }/>

@@ -54,17 +54,7 @@ function App() {
 
   return (
     <div className="App">
-
-    {/* <div>
-      {isLoggedIn ? (
-        <LogoutButton onClick={this.handleLogoutClick} />
-      ) : (
-        <LoginButton onClick={this.handleLoginClick} />
-      )}
-    </div> */}
-
-      
-      
+    
       <Routes> 
         <Route path="/" element={<LoginForm  userFade = {usernameFade} setUserFade ={setUsernameFade}/>} />
         <Route path="/reg" element={<RegForm userFade = {usernameFade} setUserFade ={setUsernameFade} />} />

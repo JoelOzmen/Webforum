@@ -3,7 +3,9 @@ import { Form, Button, InputGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./RegisterButton.css"
 import React, { useState, useEffect } from 'react'
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { setCookie } from '../Cookies';
+import Fadebook from '../Fadebook';
 
 let islogged = true;
 
@@ -12,17 +14,25 @@ const RegForm = (props) => {
   //const [username, setUsername] = useState("")
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('')
+  const [userID,setUserID] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [usernameCoockies, setUsernameCoockies] = useState('')
 
-  // function submit() {
-  //   console.log(username)
-  //   console.log(password)
-  //   console.log(islogged)
-  //   islogged = true;
-  //   console.log(islogged)
-  //   alert("hej")
-  //   return;
+  const handleChange = (e) => setUsername(e.target.value);
+  const handleChangePass = (e) => setPassword(e.target.value);
+  const handleID = (e) => setUserID(e.target.value);
+  
 
-  // }
+ 
+  useEffect(() => {
+    console.log("fuck youuuuu"+userID)
+    if(userID !=null){ 
+      setIsLoggedIn(true)
+    }else{
+      setIsLoggedIn(false)
+    }
+    
+  }, [userID]);
 
   function submitForm(event) 
   {
@@ -42,25 +52,37 @@ const RegForm = (props) => {
     })
     .then(res => res.json())
     .then(data => {
+
+      if (data.id!=null) {
+      setUserID(data.id);
+      setCookie(data.user,data.id,2)
+      setUsernameCoockies(data.user)
+      console.log(data)
+      }
       // do something with data
     })
     .catch(rejected => {
         alert("User already exist or wrong password")
-        console.log(rejected);
     });
     
-    
 
-     
-     
-    //console.log("eeeeerrrreeerrrroooror"+rawResponse)
     
   }
 
-  const handleChange = (e) => setUsername(e.target.value);
-  const handleChangePass = (e) => setPassword(e.target.value);
+  
 
-  console.log(props)
+  console.log(isLoggedIn)
+
+const userNAme = usernameCoockies;
+console.log("vaaaaarför"+ userNAme)
+props.setUserFade(userNAme);
+
+if (isLoggedIn) {
+  return <Navigate to={"/FadeBook" }/>
+ }
+
+
+
 
   return (
     <Form className="text-center" onSubmit={submitForm}>
