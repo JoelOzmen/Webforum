@@ -17,6 +17,7 @@ public class Message {
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
+    
     @ManyToOne
     private User user;
 

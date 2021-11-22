@@ -34,15 +34,16 @@ function App() {
   const [IdState,setIdState] = useState([])
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [usernameFade,setUsernameFade] = useState([])
+  const [NameState,setNameState] = useState([])
   
 
   
   //getThing() bara exempel på fetch som jag testade och gjorde på början
 
 
-  // useEffect(() => {
-  //   console.log("apppppppppp "+usernameFade)
-  // }, [usernameFade]);
+  useEffect(() => {
+    console.log("apppppppppp "+usernameFade)
+  }, [usernameFade]);
 
   return (
     <div className="App">
@@ -59,3 +60,33 @@ function App() {
   }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+/*
+package com.example.backend.controller;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(path = "/api/users/message")
+public class MessageController {
+
+//    @PostMapping(path="/")
+//    public ResponseEntity<>
+
+}
+
+
+
+*/
