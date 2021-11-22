@@ -10,7 +10,8 @@ public class PostService {
     final PostRepository postRepository;
 
     @Autowired
-    public PostService(PostRepository postRepository) {
+    public PostService(PostRepository postRepository)
+    {
         this.postRepository = postRepository;
     }
 
