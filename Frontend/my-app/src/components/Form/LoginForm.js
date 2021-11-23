@@ -91,28 +91,24 @@ if (isLoggedIn) {
           placeholder="Password" 
           value={password}
           onChange={handleChangePass}  
-        />
+          />
 
       </Form.Group>
 
-      <input className='btn btn-primary' type="submit" value="Login" onChange={handleID}  />
+      <Form.Group className="mb-3" controlId="login">
+      {/* <Form.Control  className='btn btn-primary' type="submit" value="Login" onChange={handleID} /> */}
+       <input className='btn btn-primary' type="submit" value="Login" onChange={handleID}  /> 
+      </Form.Group>
       
-      
-      <Form.Group className="mb-3" controlId="formBasicCheckbox"></Form.Group>
-      {/* <div className="Buttons"> */}
-        {/* <div className="LoginButton">
-          <Button variant="primary" type="submit">
-            Log in
-          </Button>
-        </div> */}
-        <div className="RegisterButton">
+      <Form.Group className="mb-3" controlId="formBasicCheckbox">
+
           <Link to="/reg">
             <Button variant="primary" type="submit">
               Register
             </Button>
           </Link>
-        </div>
-      {/* </div> */}
+        
+      </Form.Group>
     </Form>
   );
 };
