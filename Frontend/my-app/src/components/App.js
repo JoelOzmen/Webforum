@@ -5,6 +5,8 @@ import React,{useState ,useEffect} from 'react'
 import { Routes, Route, Link } from "react-router-dom";
 import Fadebook from "./Fadebook";
 import { getCookie } from "./Cookies";
+import Post from "./Post";
+import Message from "./Message";
 //import "./App.css";
 
 
@@ -41,9 +43,9 @@ function App() {
   //getThing() bara exempel på fetch som jag testade och gjorde på början
 
 
-  useEffect(() => {
-    console.log("apppppppppp "+usernameFade)
-  }, [usernameFade]);
+  // useEffect(() => {
+  //   console.log("apppppppppp "+usernameFade)
+  // }, [usernameFade]);
 
   return (
     <div className="App">
@@ -52,6 +54,8 @@ function App() {
         <Route path="/" element={<LoginForm  userFade = {usernameFade} setUserFade ={setUsernameFade}/>} />
         <Route path="/reg" element={<RegForm userFade = {usernameFade} setUserFade ={setUsernameFade} />} />
         <Route path="/Fadebook" element={<Fadebook  userFade = {usernameFade} setUserFade ={setUsernameFade}/> }  />
+        <Route path="/Post" element={<Post  userFade = {usernameFade} setUserFade ={setUsernameFade}/> } />
+        <Route path="/Message" element={<Message  userFade = {usernameFade} setUserFade ={setUsernameFade}/> } />
         {/* Lägg till fler routes sen */}
       </Routes>
      

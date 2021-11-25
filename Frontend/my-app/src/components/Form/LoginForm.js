@@ -67,7 +67,7 @@ const LoginForm = (props) => {
 const userNAme = usernameCoockies;
 props.setUserFade(userNAme);
 
-console.log("kom igeeeeen "+ userNAme)
+//console.log("Loginform "+ userNAme)
 if (isLoggedIn) {
   return <Navigate to={"/Fadebook" }/>
  }
