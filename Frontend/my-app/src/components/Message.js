@@ -1,4 +1,4 @@
-import { Form, Button, InputGroup, Nav } from 'react-bootstrap';
+import { Form, Button, InputGroup, NavContainer, Row, Col, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react'
 import { deleteAllCookies, getCookie } from './Cookies';
 import { Alert } from 'bootstrap';
 import { Link, Navigate } from "react-router-dom";
+import * as ReactBootStrap from "react-bootstrap"
 
 
 const Message = (props) => {
@@ -27,37 +28,79 @@ const Message = (props) => {
 
 
   return (
+    <div className="Message">
 
-    <Form onSubmit={submitForm}>
-      <Form.Group className="mb-3" controlId="username">
-        <Form.Label>Username</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={handleChange}
-
-        />
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="message">
-        <Form.Label>Message</Form.Label>
-        <Form.Control
-          as="textarea"
-          rows={6}
-          placeholder="Message"
-          value={messageText}
-          onChange={handleChangePass}
+      <Container>
+        <Row>
 
 
-        />
-      </Form.Group>
+          <Col><Form onSubmit={submitForm}>
+            <Form.Group className="mb-3" controlId="username">
+              <Form.Label>Receiver</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Receiver"
+                value={username}
+                onChange={handleChange}
 
-      <Form.Group>
-        <input className='btn btn-primary' type="submit" value="Submit" />
-      </Form.Group>
+              />
+            </Form.Group>
 
-    </Form>
+            <Form.Group className="mb-3" controlId="message">
+              <Form.Label>Message</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={6}
+                placeholder="Message"
+                value={messageText}
+                onChange={handleChangePass}
+
+
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <input className='btn btn-primary' type="submit" value="Submit" />
+            </Form.Group>
+
+          </Form></Col>
+          <Col> </Col>
+        </Row>
+      </Container>
+
+      <p>&nbsp;</p>
+
+
+      <Container>
+        <Row>
+          <Col><h2>My Messages </h2><ReactBootStrap.Table striped bordered hover size="sm">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Date</th>
+                <th>Message</th>
+
+              </tr>
+            </thead>
+            <tbody>
+
+
+              {props.data && props.data.data.map((data, index) => {
+                return <tr key={index}>
+                  <td>{data.username}</td>
+                  <td>{data.date}</td>
+                  <td>{data.message}</td>
+
+                </tr>
+
+              })}
+            </tbody>
+          </ReactBootStrap.Table></Col>
+
+        </Row>
+
+      </Container>
+    </div>
 
     //   <form>
     //   <label>

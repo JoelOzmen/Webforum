@@ -1,7 +1,5 @@
 package com.example.backend.controller;
-//package com.example.backend.controller;
 import com.example.backend.model.Message;
-import com.example.backend.model.User;
 import com.example.backend.service.MessageService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

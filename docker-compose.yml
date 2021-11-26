@@ -1,0 +1,89 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db'
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: 'user'
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'password'
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - '3306:3306'  #3307 för att jag använder 3306 nånstans
+
+# frontend:
+#     container_name: frontend-ui
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     volumes:
+#       - '.:/my-app'
+#       - '/my-app/node_modules'
+#     ports:
+#       - 3000:3000
+      
+    # frontend:
+    #   build:
+    #     context: ./client
+    #     dockerfile: ./Dockerfile
+    #   image: "dmurphy1217/twitter-sentiment-frontend"
+    #   ports:
+    #     - "3000:3000"
+
+  backend:
+    build: ./backend
+    environment:
+      - DB_HOST=db
+    ports:
+      - "8090:8090"
+    links:
+      - db
+
+  frontend:
+    build: ./Frontend/my-app/
+    ports:
+    - "3000:3000"
+      
+   
+
+
+
+  # message-server:
+  #       container_name: message-server
+  #       build:
+  #           context: docker-message-server
+  #           dockerfile: Dockerfile
+  #       image: message-server:latest
+  #       ports:
+  #           - 18888:8888
+  #       networks:
+  #           - spring-cloud-network
+  #   product-server:
+  #       container_name: product-server
+  #       build:
+  #           context: docker-product-server
+  #           dockerfile: Dockerfile
+  #       image: product-server:latest
+  #       ports:
+  #           - 19999:9999
+  #       networks:
+  #           - spring-cloud-network
+
+
+# services:
+#   sample:
+#     container_name: sample
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     volumes:
+#       - '.:/app'
+#       - '/app/node_modules'
+#     ports:
+#       - 3001:3000
+#     environment:
+#       - CHOKIDAR_USEPOLLING=true

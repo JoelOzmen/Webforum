@@ -4,11 +4,10 @@ import com.example.backend.model.User;
 import com.example.backend.model.viewModel.LoginVM;
 import com.example.backend.model.viewModel.UserVM;
 import com.example.backend.service.UserService;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.json.*;
 
 import java.util.List;
 

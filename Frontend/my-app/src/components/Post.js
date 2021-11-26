@@ -1,4 +1,4 @@
-import { Form, Button, InputGroup, Nav } from 'react-bootstrap';
+import { Form, Button, InputGroup, Nav, Container, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react'
 import { deleteAllCookies, getCookie } from './Cookies';
 import { Alert } from 'bootstrap';
 import { Link, Navigate } from "react-router-dom";
+import * as ReactBootStrap from "react-bootstrap"
 
 
 const Post = (props) => {
@@ -27,27 +28,35 @@ const Post = (props) => {
   }
 
   return (
+    <div className="Post">
 
-    <Form onSubmit={submitForm}>
+      <Container>
+        <Col><h2>Usersname {props.userFade} posts</h2><ReactBootStrap.Table striped bordered hover size="sm">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Post</th>
 
-      <Form.Group className="mb-3" controlId="message">
-        <Form.Label>Message</Form.Label>
-        <Form.Control
-          as="textarea"
-          rows={6}
-          placeholder="Message"
-          value={postText}
-          onChange={handleChangePass}
+            </tr>
+          </thead>
+          <tbody>
 
-        />
-      </Form.Group>
 
-      <Form.Group>
-        <input className='btn btn-primary' type="submit" value="Submit" />
-      </Form.Group>
+            {props.data && props.data.data.map((data, index) => {
+              return <tr key={index}>
+                <td>{data.date}</td>
+                <td>{data.post}</td>
 
-    </Form>
 
+              </tr>
+
+            })}
+          </tbody>
+        </ReactBootStrap.Table></Col>
+
+      </Container>
+
+    </div>
 
     //   <form>
     //   <label>

@@ -1,4 +1,4 @@
-import { Form, Button, InputGroup, Nav } from 'react-bootstrap';
+import { Form, Button, InputGroup, Nav, Container, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route, Link, Navigate, NavLink } from "react-router-dom";
 
@@ -8,6 +8,18 @@ import { Alert } from 'bootstrap';
 import Message from './Message';
 import Post from './Post';
 import LoginForm from './Form/LoginForm';
+import * as ReactBootStrap from "react-bootstrap"
+import { eventNames } from 'process';
+
+
+
+
+
+
+
+
+
+
 
 
 //import Message from '../Message';
@@ -20,6 +32,7 @@ const Fadebook = (props) => {
   const [routeChooser, setRouteChooser] = useState('');
   const [logged, setLogged] = useState(false);
 
+
   const handleChange = (e) => setLogged(false);
 
   console.log("fadebook username: " + props.userFade)
@@ -27,136 +40,149 @@ const Fadebook = (props) => {
   console.log("coockie value: " + val)
 
 
+  const [postText, setPostText] = useState('')
+  //const handleChange = (e) => setUsername(e.target.value);
+  const handleChangePass = (e) => setPostText(e.target.value);
 
 
-  function myFunction() {
-    alert("myFunction");
-    deleteAllCookies();
-    // setRouteChooser("myFunction")
+  const [username, setUsername] = useState('');
+
+
+  function submitForm(event) {
+
 
   }
-
-  function myFunction1() {
-    alert("myFunction1");
-    // setRouteChooser("myFunction1");
-
-
-    //return <Navigate to={"/Post" }/>
-  }
-
-  function myFunction2() {
-    alert("myFunction2");
-    // setRouteChooser("myFunction2")
-
-  }
-
-  //  if (logged) {
-  //    setRouteChooser="";
-  //   return <Navigate to={"/FadeBook" }/>
-  //  }
-
-
-
-  // if (routeChooser == "myFunction") {
-  //   setRouteChooser("");
-  //   console.log("login")
-  //   return (
-  //     <Link to={"/"} />
-  //   );
-  // }
-  // if (routeChooser == "myFunction1") {
-  //   console.log("Post")
-  //   setRouteChooser("");
-  //   return (
-  //     <Link to={"/Post "} />
-  //   );
-  // }
-  // if (routeChooser == "myFunction2") {
-  //   setRouteChooser("");
-  //   console.log("Message")
-  //   return (
-  //     <Link to={"/Message"} />
-  //   );
-  // }
 
   return (
+    <div className="Fadebook" >
 
-    <Nav
-      // activeKey="/"
-      //onSelect={(logout) => alert(`selected ${logout}`)}
-
-      // onSelect={() => myFunction()}
-      // onSelect={() => myFunction1()}
-      // onSelect={() => myFunction2()}
+      <div className="navs">
 
 
+        <Nav>
 
-      // onSelect={(selectedKey) => 
-      //   {if (`${selectedKey}` == "selectedKey1") {
-      //     console.log("2")
-      //   }}
-      //   }
-
-
-      // onSelect={(selectedKey) => {
-      //   if (`${selectedKey}` == "selectedKey") {
-      //     setRouteChooser("myFunction")
-      //     myFunction()
-      //   }
-      //   if (`${selectedKey}` == "selectedKey1") {
-      //     setRouteChooser("myFunction1")
-      //     myFunction1();
-      //   }
-      //   if (`${selectedKey}` == "selectedKey2") {
-      //     setRouteChooser("myFunction2")
-      //     myFunction2();
-      //   }
-
-      // }
+          <NavLink to="/"
+            className={isActive =>
+              "nav-link" + (!isActive ? " unselected" : "")
+            } >Log out
+          </NavLink>
 
 
-      // }
+          <Nav.Item >
+            <NavLink to="/Post"
+              className={isActive =>
+                "nav-link" + (!isActive ? " unselected" : "")
+              } >Post</NavLink>
+          </Nav.Item>
 
-    //onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
+          <Nav.Item >
+            <NavLink to="/Message"
+              className={isActive =>
+                "nav-link" + (!isActive ? " unselected" : "")
+              }>Message</NavLink>
+          </Nav.Item>
 
-    >
-      
-        <NavLink to="/"
-          className={isActive =>
-            "nav-link" + (!isActive ? " unselected" : "")
-          } {...myFunction} >Log out 
-        </NavLink>
-    
+          <Nav.Item>
+            <Nav.Link eventKey="disabled" disabled>
+              Fadebook
+            </Nav.Link>
+          </Nav.Item>
 
-      <Nav.Item >
-        <NavLink to="/Post"
-          className={isActive =>
-            "nav-link" + (!isActive ? " unselected" : "")
-          } >Post</NavLink>
-      </Nav.Item>
+          {/* <form>
+            <label>
+              UserName: {props.userFade}
+              <input type="text" value={val} />
+            </label>
 
-      <Nav.Item >
-        <NavLink to="/Message"
-          className={isActive =>
-            "nav-link" + (!isActive ? " unselected" : "")
-          }>Message</NavLink>
-      </Nav.Item>
+          </form> */}
 
-      <Nav.Item>
-        <Nav.Link eventKey="disabled" disabled>
-          Fadebook
-        </Nav.Link>
-      </Nav.Item>
+        </Nav>
+      </div>
+
+      <div className="CreatePost">
+
+        <Container>
+          <Row>
+
+            <Col><Form onSubmit={submitForm}>
+
+              <Form.Group className="mb-3" controlId="message">
+                <Form.Label>Create a Post</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={6}
+                  placeholder="Post"
+                  value={postText}
+                  onChange={handleChangePass}
+
+                />
+              </Form.Group>
+
+              <Form.Group>
+                <input className='btn btn-primary' type="submit" value="Submit" />
+              </Form.Group>
+
+            </Form></Col>
+            <Col>  </Col>
+            <Col><h2>Fadename: {props.userFade} </h2> </Col>
+            <Col>  </Col>
+            <Col>
+
+              <Form className="text-center" onSubmit={submitForm}>
+                <h2>Find Users Posts</h2>
+
+                <Form.Group className="mb-3" controlId="username" >
+                  <Form.Label>Username</Form.Label>
+                  <Form.Control type="text"
+                    placeholder="Username"
+                    value={username}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
 
 
-      <form>
-        <label>
-          UserName: {props.userFade}
-          <input type="text" value={val} />
-        </label>
 
-      </form>
-    </Nav>
+                <input className='btn btn-primary' type="submit" value="Search" />
+
+              </Form>
+
+            </Col>
+
+          </Row>
+        </Container>
+      </div>
+      <p>&nbsp;</p>
+
+
+      <div className="AllPosts">
+        <Container>
+          <Row>
+            <Col><h2>My Posts </h2><ReactBootStrap.Table striped bordered hover size="sm">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Post</th>
+
+                </tr>
+              </thead>
+              <tbody>
+
+                {props.data && props.data.data.map((data, index) => {
+                  return <tr key={index}>
+                    <td>{data.date}</td>
+                    <td>{data.post}</td>
+
+                  </tr>
+
+                })}
+              </tbody>
+            </ReactBootStrap.Table></Col>
+          </Row>
+        </Container>
+      </div>
+
+    </div>
+
   );
 
 }
