@@ -30,7 +30,7 @@ public class MessageController {
             return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
         }
         else {
-            return new ResponseEntity(vm, HttpStatus.OK);
+            return ResponseEntity.status(HttpStatus.OK).body(vm);
         }
     }
 

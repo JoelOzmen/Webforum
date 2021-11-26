@@ -73,4 +73,8 @@ public class User {
     public void setMessagesReceived(Message messageReceived) {
         this.messagesReceived.add(messageReceived);
     }
+
+    public String getPassword() {
+        return password;
+    }
 }
