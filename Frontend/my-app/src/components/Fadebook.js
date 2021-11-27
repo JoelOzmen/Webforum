@@ -203,7 +203,7 @@ const Fadebook = (props) => {
             <Col>  </Col>
             <Col>
 
-              <Form className="text-center" onSubmit={submitForm}>
+              {/* <Form className="text-center" onSubmit={submitForm}>
                 <h2>Find Users Posts</h2>
 
                 <Form.Group className="mb-3" controlId="username" >
@@ -219,7 +219,7 @@ const Fadebook = (props) => {
 
                 <input className='btn btn-primary' type="submit" value="Search" />
 
-              </Form>
+              </Form> */}
 
             </Col>
 
