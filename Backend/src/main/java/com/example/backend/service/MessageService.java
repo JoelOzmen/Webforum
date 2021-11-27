@@ -29,8 +29,13 @@ public class MessageService {
         return messageRepository.save(ms);
     }
 
-    public List<Message> getMessagesById(long id) {
+    public List<Message> getMessagesBySenderId(long id) {
         var messages = messageRepository.findAllBySenderId(id);
+        return messages;
+    }
+
+    public List<Message> getMessagesByReceiverId(long id) {
+        var messages = messageRepository.findAllByReceiverId(id);
         return messages;
     }
 }

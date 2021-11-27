@@ -95,10 +95,19 @@ public class UserController {
         return new ResponseEntity(vm, HttpStatus.OK);
     }
 
-    //http://localhost:8090/api/users/user/"id"/messages
-    @GetMapping(path = "/user/{id}/messages")
-    public ResponseEntity<List<MessageVM>> getMessagesByUser(@PathVariable long id) {
-        List<Message> messages = messageService.getMessagesById(id);
+    //http://localhost:8090/api/users/user/"id"/messages/sent
+    @GetMapping(path = "/user/{id}/messages/sent")
+    public ResponseEntity<List<MessageVM>> getMessagesFromSID(@PathVariable long id) {
+        List<Message> messages = messageService.getMessagesBySenderId(id);
+        var vm = messages.stream().map(message -> new MessageVM(message.getText(),
+                message.getSender().getId(), message.getReceiver().getId(), message.getDate())).collect(Collectors.toList());
+        return new ResponseEntity(vm, HttpStatus.OK);
+    }
+
+    //http://localhost:8090/api/users/user/"id"/messages/received
+    @GetMapping(path = "/user/{id}/messages/received")
+    public ResponseEntity<List<MessageVM>> getMessagesFromRID(@PathVariable long id) {
+        List<Message> messages = messageService.getMessagesByReceiverId(id);
         var vm = messages.stream().map(message -> new MessageVM(message.getText(),
                 message.getSender().getId(), message.getReceiver().getId(), message.getDate())).collect(Collectors.toList());
         return new ResponseEntity(vm, HttpStatus.OK);
