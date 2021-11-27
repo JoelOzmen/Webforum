@@ -3,13 +3,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route, Link, Navigate, NavLink } from "react-router-dom";
 
 import React, { useState, useEffect } from 'react'
-import { deleteAllCookies, getCookie } from './Cookies';
+import { deleteAllCookies, getCookie,setCookie } from './Cookies';
 import { Alert } from 'bootstrap';
 import Message from './Message';
 import Post from './Post';
 import LoginForm from './Form/LoginForm';
 import * as ReactBootStrap from "react-bootstrap"
 import { eventNames } from 'process';
+
 
 
 
@@ -32,11 +33,11 @@ const Fadebook = (props) => {
   const [routeChooser, setRouteChooser] = useState('');
   const [logged, setLogged] = useState(false);
 
-
+  
   const handleChange = (e) => setLogged(false);
 
-  console.log("fadebook username: " + props.userFade)
   var val = getCookie(props.userFade);
+  console.log("fadebook username: " + val)
   console.log("coockie value: " + val)
 
 
@@ -47,11 +48,85 @@ const Fadebook = (props) => {
 
   const [username, setUsername] = useState('');
 
+  const[userPost,setUserPost] = useState([]);
+
+  const [text, setText] = useState('');
+  const [userId, setUserId] = useState(null);
+
 
   function submitForm(event) {
 
 
   }
+  console.log("userID:   ",props.userfade);
+
+
+
+  
+
+  // useEffect(async() => {
+  // fetch((`http://localhost:8080/api/users/user/${val}/posts`)
+  // ).then(Response => Response.json()
+  // ).then((data) => {
+  //     console.log("all data for post   ",data)
+  //       setUserPost(data); 
+  //       console.log(userPost);  
+  //   })
+  // }, []) 
+
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+       const result = await fetch(`http://localhost:8080/api/users/user/${val}/posts`);
+       const body = await result.json();
+       console.log(body)
+       setUserPost(body);
+      } catch(err) {
+        // error handling code
+      } 
+    }
+  
+    // call the async fetchData function
+    fetchData()
+  
+  }, [])
+  console.log("snaaaaalaa  ",userPost);
+
+
+  const [userID, setUserID] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [usernameCoockies, setUsernameCoockies] = useState('')
+
+  function submitForm(event) {
+    let TEXT = postText;
+    let USERID = val;
+    event.preventDefault();
+
+  const rawResponse = fetch('http://localhost:8080/api/post/publish', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ text: TEXT, userId: USERID })
+    })
+      .then(Response => Response.json()
+      ).then(data => {
+
+        //setUserID(data.userId);
+        
+        //setCookie(username, data.id, 2)
+        //setUsernameCoockies(username)
+
+      })
+      .catch(rejected => {
+        alert("User already exist or wrong password")
+      });
+    }
+
+
 
   return (
     <div className="Fadebook" >
@@ -128,13 +203,13 @@ const Fadebook = (props) => {
             <Col>  </Col>
             <Col>
 
-              <Form className="text-center" onSubmit={submitForm}>
+              {/* <Form className="text-center" onSubmit={submitForm}>
                 <h2>Find Users Posts</h2>
 
                 <Form.Group className="mb-3" controlId="username" >
-                  <Form.Label>Username</Form.Label>
+                  <Form.Label>User ID</Form.Label>
                   <Form.Control type="text"
-                    placeholder="Username"
+                    placeholder="User ID"
                     value={username}
                     onChange={handleChange}
                   />
@@ -144,7 +219,7 @@ const Fadebook = (props) => {
 
                 <input className='btn btn-primary' type="submit" value="Search" />
 
-              </Form>
+              </Form> */}
 
             </Col>
 
@@ -160,17 +235,17 @@ const Fadebook = (props) => {
             <Col><h2>My Posts </h2><ReactBootStrap.Table striped bordered hover size="sm">
               <thead>
                 <tr>
-                  <th>Date</th>
                   <th>Post</th>
+                  <th>Date</th>
 
                 </tr>
               </thead>
               <tbody>
 
-                {props.data && props.data.data.map((data, index) => {
+                {userPost.map((userPost, index) => {
                   return <tr key={index}>
-                    <td>{data.date}</td>
-                    <td>{data.post}</td>
+                    <td>{userPost.text}</td>
+                    <td>{userPost.date}</td>
 
                   </tr>
 

@@ -20,11 +20,81 @@ const Message = (props) => {
   const handleChange = (e) => setUsername(e.target.value);
   const handleChangePass = (e) => setMessageText(e.target.value);
 
+  const[allMessage,setAllMessage] = useState();
+  
+
+  const [message, setMessage] = useState('')
+
 
   function submitForm(event) {
 
 
   }
+
+  function submitForm(event) {
+    let TEXT = messageText;
+    let USERID = val;
+    let DATE =Date.now()
+    let USERNAME = username;
+    event.preventDefault();
+
+
+    const rawResponse = fetch('http://localhost:8080/api/message/send', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({text: TEXT,senderId: USERID,receiverId: USERNAME })
+    })
+      .then(response => {
+        if(response.ok){
+          return response.json()
+        }
+        throw response
+      } 
+      ).then(data => {
+        console.log("dsadsadsadsadsadsa   ",data)
+        console.log("teeext snalla ",data.text)
+        setMessage(data.text);
+
+        if (data.text ==null) {
+          alert("post input is empty!")
+          
+        }
+
+        //setUserID(data.userId);
+
+        //setCookie(username, data.id, 2)
+        //setUsernameCoockies(username)
+
+      })
+      .catch(rejected => {
+        alert("Wrong post input")
+      });
+
+      
+  }
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+       const result = await fetch(`http://localhost:8080/api/users/user/${val}/messages`);
+       const body = await result.json();
+       setAllMessage(body);
+      } catch(err) {
+        // error handling code
+      } 
+    }
+  
+    // call the async fetchData function
+    fetchData()
+  
+  }, [])
+
+
+  
 
 
   return (
@@ -36,10 +106,10 @@ const Message = (props) => {
 
           <Col><Form onSubmit={submitForm}>
             <Form.Group className="mb-3" controlId="username">
-              <Form.Label>Receiver</Form.Label>
+              <Form.Label>Receiver ID</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Receiver"
+                placeholder="Receiver ID"
                 value={username}
                 onChange={handleChange}
 
@@ -76,20 +146,22 @@ const Message = (props) => {
           <Col><h2>My Messages </h2><ReactBootStrap.Table striped bordered hover size="sm">
             <thead>
               <tr>
-                <th>Username</th>
+                <th>Content</th>
+                <th>Sender ID</th>
+                <th>Receiver ID</th>
                 <th>Date</th>
-                <th>Message</th>
 
               </tr>
             </thead>
             <tbody>
 
 
-              {props.data && props.data.data.map((data, index) => {
+              {allMessage && allMessage.map((allMessage, index) => {
                 return <tr key={index}>
-                  <td>{data.username}</td>
-                  <td>{data.date}</td>
-                  <td>{data.message}</td>
+                  <td>{allMessage.text}</td>
+                  <td>{allMessage.senderId}</td>
+                  <td>{allMessage.receiverId}</td>
+                  <td>{allMessage.date}</td>
 
                 </tr>
 

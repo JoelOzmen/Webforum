@@ -56,7 +56,8 @@ public class UserController {
     @PostMapping(path = "/add")
     public ResponseEntity<UserVM> createUser(@RequestBody UserVM user) {
         User user1 = userService.addUser(user.username, user.password);
-        if(user1 == null) {
+
+        if(user1 == null || user1.getUsername()==null || user1.getPassword() ==null ) {
             return new ResponseEntity(HttpStatus.IM_USED);
         }
         else{
