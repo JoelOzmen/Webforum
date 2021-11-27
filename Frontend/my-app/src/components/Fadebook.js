@@ -37,8 +37,8 @@ const Fadebook = (props) => {
   const handleChange = (e) => setLogged(false);
 
   var val = getCookie(props.userFade);
-  console.log("fadebook username: " + val)
-  console.log("coockie value: " + val)
+  // console.log("fadebook username: " + val)
+  // console.log("coockie value: " + val)
 
 
   const [postText, setPostText] = useState('')
@@ -58,7 +58,7 @@ const Fadebook = (props) => {
 
 
   }
-  console.log("userID:   ",props.userfade);
+  //console.log("userID:   ",props.userfade);
 
 
 
@@ -81,9 +81,10 @@ const Fadebook = (props) => {
       try {
        const result = await fetch(`http://localhost:8080/api/users/user/${val}/posts`);
        const body = await result.json();
-       console.log(body)
+       //console.log(body)
        setUserPost(body);
       } catch(err) {
+        console.log(err)
         // error handling code
       } 
     }
@@ -92,7 +93,7 @@ const Fadebook = (props) => {
     fetchData()
   
   }, [])
-  console.log("snaaaaalaa  ",userPost);
+  //console.log("snaaaaalaa  ",userPost);
 
 
   const [userID, setUserID] = useState(null);
@@ -113,8 +114,8 @@ const Fadebook = (props) => {
       body: JSON.stringify({ text: TEXT, userId: USERID })
     })
       .then(Response => Response.json()
-      ).then(data => {
-
+      ).then(Response => {
+        console.log("bug teesssst   ", Response)
         //setUserID(data.userId);
         
         //setCookie(username, data.id, 2)

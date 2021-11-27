@@ -11,9 +11,9 @@ import * as ReactBootStrap from "react-bootstrap"
 
 const Message = (props) => {
 
-  console.log("fadebook username: " + props.userFade)
+  //console.log("fadebook username: " + props.userFade)
   var val = getCookie(props.userFade);
-  console.log("coockie value: " + val)
+  //console.log("coockie value: " + val)
 
   const [username, setUsername] = useState('');
   const [messageText, setMessageText] = useState('')
@@ -53,22 +53,7 @@ const Message = (props) => {
         }
         throw response
       } 
-      ).then(data => {
-        console.log("dsadsadsadsadsadsa   ",data)
-        console.log("teeext snalla ",data.text)
-        setMessage(data.text);
-
-        if (data.text ==null) {
-          alert("post input is empty!")
-          
-        }
-
-        //setUserID(data.userId);
-
-        //setCookie(username, data.id, 2)
-        //setUsernameCoockies(username)
-
-      })
+      )
       .catch(rejected => {
         alert("Wrong post input")
       });
@@ -77,10 +62,26 @@ const Message = (props) => {
   }
 
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //      const result = await fetch(`http://localhost:8080/api/users/user/${val}/messages`);
+  //      const body = await result.json();
+  //      setAllMessage(body);
+  //     } catch(err) {
+  //       // error handling code
+  //     } 
+  //   }
+  
+  //   // call the async fetchData function
+  //   fetchData()
+  
+  // }, [])
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-       const result = await fetch(`http://localhost:8080/api/users/user/${val}/messages`);
+       const result = await fetch(`http://localhost:8080/api/users/user/${val}/messages/received`);
        const body = await result.json();
        setAllMessage(body);
       } catch(err) {
@@ -92,6 +93,7 @@ const Message = (props) => {
     fetchData()
   
   }, [])
+ 
 
 
   

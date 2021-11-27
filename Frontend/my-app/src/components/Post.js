@@ -42,6 +42,7 @@ const Post = (props) => {
        console.log(body)
        setUserPost(body);
       } catch(err) {
+        console.log("error nu ",err)
         // error handling code
       } 
     }
