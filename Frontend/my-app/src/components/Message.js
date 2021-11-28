@@ -21,6 +21,7 @@ const Message = (props) => {
   const handleChangePass = (e) => setMessageText(e.target.value);
 
   const[allMessage,setAllMessage] = useState();
+  const[allMessage1,setAllMessage1] = useState();
   
 
   const [message, setMessage] = useState('')
@@ -61,6 +62,8 @@ const Message = (props) => {
       
   }
 
+  
+
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -94,6 +97,22 @@ const Message = (props) => {
   
   }, [])
  
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+       const result = await fetch(`http://localhost:8080/api/users/user/${val}/messages/sent`);
+       const body = await result.json();
+       setAllMessage1(body);
+      } catch(err) {
+        // error handling code
+      } 
+    }
+  
+    // call the async fetchData function
+    fetchData()
+  
+  }, [])
 
 
   
@@ -142,10 +161,9 @@ const Message = (props) => {
 
       <p>&nbsp;</p>
 
-
       <Container>
         <Row>
-          <Col><h2>My Messages </h2><ReactBootStrap.Table striped bordered hover size="sm">
+          <Col><h2>My Messages Received </h2><ReactBootStrap.Table striped bordered hover size="sm">
             <thead>
               <tr>
                 <th>Content</th>
@@ -165,7 +183,12 @@ const Message = (props) => {
                   <td>{allMessage.receiverId}</td>
                   <td>{allMessage.date}</td>
 
+                  
+
                 </tr>
+                
+
+                
 
               })}
             </tbody>
@@ -174,6 +197,46 @@ const Message = (props) => {
         </Row>
 
       </Container>
+
+      <Container>
+        <Row>
+          <Col><h2>My Messages Sent </h2><ReactBootStrap.Table striped bordered hover size="sm">
+            <thead>
+              <tr>
+                <th>Content</th>
+                <th>Sender ID</th>
+                <th>Receiver ID</th>
+                <th>Date</th>
+
+              </tr>
+            </thead>
+            <tbody>
+
+
+              {allMessage1 && allMessage1.map((allMessage1, index) => {
+                return <tr key={index}>
+                  <td>{allMessage1.text}</td>
+                  <td>{allMessage1.senderId}</td>
+                  <td>{allMessage1.receiverId}</td>
+                  <td>{allMessage1.date}</td>
+
+                  
+
+                </tr>
+                
+
+                
+
+              })}
+            </tbody>
+          </ReactBootStrap.Table></Col>
+
+        </Row>
+
+      </Container>
+
+
+      
     </div>
 
     //   <form>
