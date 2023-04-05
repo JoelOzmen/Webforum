@@ -11,79 +11,31 @@ import LoginForm from './Form/LoginForm';
 import * as ReactBootStrap from "react-bootstrap"
 import { eventNames } from 'process';
 
-
-
-
-
-
-
-
-
-
-
-
-
-//import Message from '../Message';
-//import Post from '../Post';
-//import LoginForm from './LoginForm';
-
-
-const Fadebook = (props) => {
-
+  const Fadebook = (props) => {
   const [routeChooser, setRouteChooser] = useState('');
   const [logged, setLogged] = useState(false);
-
-  
   const handleChange = (e) => setLogged(false);
-
+    
   var val = getCookie(props.userFade);
-  // console.log("fadebook username: " + val)
-  // console.log("coockie value: " + val)
-
 
   const [postText, setPostText] = useState('')
-  //const handleChange = (e) => setUsername(e.target.value);
   const handleChangePass = (e) => setPostText(e.target.value);
-
-
   const [username, setUsername] = useState('');
-
   const[userPost,setUserPost] = useState([]);
-
   const [text, setText] = useState('');
   const [userId, setUserId] = useState(null);
 
 
-  function submitForm(event) {
-
-
-  }
-  //console.log("userID:   ",props.userfade);
-
-
-
-  
-
-  // useEffect(async() => {
-  // fetch((`http://localhost:8080/api/users/user/${val}/posts`)
-  // ).then(Response => Response.json()
-  // ).then((data) => {
-  //     console.log("all data for post   ",data)
-  //       setUserPost(data); 
-  //       console.log(userPost);  
-  //   })
-  // }, []) 
-
-
+  function submitForm(event) {}
 
   useEffect(() => {
     const fetchData = async () => {
       try {
        const result = await fetch(`http://localhost:8080/api/users/user/${val}/posts`);
        const body = await result.json();
-       //console.log(body)
        setUserPost(body);
-      } catch(err) {
+      } 
+      catch(err) {
         console.log(err)
         // error handling code
       } 
@@ -93,7 +45,6 @@ const Fadebook = (props) => {
     fetchData()
   
   }, [])
-  //console.log("snaaaaalaa  ",userPost);
 
 
   const [userID, setUserID] = useState(null);
@@ -116,11 +67,6 @@ const Fadebook = (props) => {
       .then(Response => Response.json()
       ).then(Response => {
         console.log("bug teesssst   ", Response)
-        //setUserID(data.userId);
-        
-        //setCookie(username, data.id, 2)
-        //setUsernameCoockies(username)
-
       })
       .catch(rejected => {
         alert("User already exist or wrong password")
@@ -164,13 +110,7 @@ const Fadebook = (props) => {
             </Nav.Link>
           </Nav.Item>
 
-          {/* <form>
-            <label>
-              UserName: {props.userFade}
-              <input type="text" value={val} />
-            </label>
-
-          </form> */}
+          {}
 
         </Nav>
       </div>
@@ -204,23 +144,7 @@ const Fadebook = (props) => {
             <Col>  </Col>
             <Col>
 
-              {/* <Form className="text-center" onSubmit={submitForm}>
-                <h2>Find Users Posts</h2>
-
-                <Form.Group className="mb-3" controlId="username" >
-                  <Form.Label>User ID</Form.Label>
-                  <Form.Control type="text"
-                    placeholder="User ID"
-                    value={username}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-
-
-
-                <input className='btn btn-primary' type="submit" value="Search" />
-
-              </Form> */}
+              {}
 
             </Col>
 
